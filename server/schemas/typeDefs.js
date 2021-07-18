@@ -6,16 +6,15 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    password: String
+    bookCount: Int
     savedBooks: [Book]!
   }
 
   type Book {
-    _id: ID
+    bookID: String
     title: String
     authors: String
     description: String
-    bookID: String
     image: String
     link: String
   }
@@ -26,6 +25,9 @@ const typeDefs = gql`
   }
 
 //   Query type provides the entry point for our data
+
+// from README =     me: Which returns a User type.?????
+
   type Query {
     users: [User]
     user(username: String!): User

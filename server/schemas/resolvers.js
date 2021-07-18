@@ -51,13 +51,14 @@ const resolvers = {
       await User.findOneAndUpdate(
         //   update this line still
         { username: thoughtAuthor },
-        { $addToSet: { book: book._id } }
+        { $addToSet: { book: book.bookID } }
       );
 
       return book;
     },
     
     removeBook: async (parent, { bookID }) => {
+      // UPDATE:_id might not work after changing in typeDefs
       return Book.findOneAndDelete({ _id: bookID });
     },
   },
