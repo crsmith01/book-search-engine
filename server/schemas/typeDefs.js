@@ -25,14 +25,16 @@ const typeDefs = gql`
   }
 
 //   Query type provides the entry point for our data
-
+  // type Query {
+  //   users: [User]
+  //   user(username: String!): User
+  //   books(username: String): [Book]
+  //   book(bookID: ID!): Book
+  // }
+  
 // from README =     me: Which returns a User type.?????
-
   type Query {
-    users: [User]
-    user(username: String!): User
-    books(username: String): [Book]
-    book(bookID: ID!): Book
+    me: User
   }
 
 //   Mutation type to provide entry point for modifying our data
