@@ -1,8 +1,6 @@
 // Import graphql from apollo-server-express and create a variable called typeDefs = to define the data
 const { gql } = require('apollo-server-express');
 
-const { gql } = require('apollo-server-express');
-
 const typeDefs = gql`
   type User {
     _id: ID
