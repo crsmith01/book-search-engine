@@ -43,7 +43,9 @@ const resolvers = {
 
       return { token, user };
     },
-    addBook: async (parent, { title, authors, description, image, link }) => {
+
+    // saveBook: Accepts a book author's array, description, title, bookId, image, and link as parameters; returns a User type. (Look into creating what's known as an input type to handle all of these parameters!)
+    saveBook: async (parent, { title, authors, description, image, link }) => {
       const book = await Book.create({ title, authors, description, image, link });
 
       await User.findOneAndUpdate(
