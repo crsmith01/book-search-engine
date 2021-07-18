@@ -24,6 +24,31 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
+// **************Need to continue updating to make sense for this case
+  const [saveBook, { error }] = useMutation(SAVE_BOOK, {
+    update(cache, { data: { saveBook } }) {
+      try {
+        const { books } = cache.readQuery({ query: QUERY_THOUGHTS });
+
+        cache.writeQuery({
+          query: QUERY_THOUGHTS,
+          data: { books: [saveBook, ...books] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      // update me object's cache
+      const { me } = cache.readQuery({ query: QUERY_ME });
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, books: [...me.books, saveBook] } },
+      });
+    },
+  });
+
+
+
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
