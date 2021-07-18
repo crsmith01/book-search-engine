@@ -11,8 +11,12 @@ import { LOGIN_USER } from '../../utils/mutations';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  // const [validated] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
+
+  // useMutation() hook
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
