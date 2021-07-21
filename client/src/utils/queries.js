@@ -2,17 +2,22 @@
 import { gql } from '@apollo/client';
 
 
-// NEED TO UPDATE
 export const GET_ME = gql`
-  query user($username: String!) {
-    user(username: $username) {
+  query me {
+    me {
       _id
       username
       email
-      thoughts {
+      bookCount
+      savedBooks {
         _id
-        thoughtText
-        createdAt
+        bookId
+        // of is it bookID??
+        title
+        authors
+        description
+        image
+        link
       }
     }
   }
