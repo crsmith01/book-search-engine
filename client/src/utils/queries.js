@@ -11,8 +11,8 @@ export const GET_ME = gql`
       bookCount
       savedBooks {
         _id
-        bookId
-        // of is it bookID??
+        bookID
+        // of is it bookId??
         title
         authors
         description
