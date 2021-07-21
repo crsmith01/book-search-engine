@@ -13,12 +13,12 @@ const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   // // set state for form validation
-  // const [validated] = useState(false);
+  const [validated] = useState(false);
   // // set state for alert
-  // const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   // useMutation() hook
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
 
   const handleInputChange = (event) => {
@@ -37,7 +37,9 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUser(userFormData);
+      const response = await createUser({
+        variables: {...userFormData}
+      });
 
       if (!response.ok) {
         throw new Error('something went wrong!');
