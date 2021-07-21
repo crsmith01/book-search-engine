@@ -14,6 +14,11 @@ import { REMOVE_BOOK } from '../../utils/mutations';
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
 
+  const {, } = useQuery(GET_ME);
+
+  const [removeBook, {error}] = useMutation(REMOVE_BOOK);
+
+  const userData = data?.me || [];
 
 
   // **************Need to continue updating to make sense for this case
@@ -76,7 +81,9 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      // const response = await deleteBook(bookId, token);
+
+      const response = await removeBook(bookId, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -91,30 +98,6 @@ const SavedBooks = () => {
     }
   };
   
-// **************Need to continue updating to make sense for this case
-const [saveBook, { error }] = useMutation(SAVE_BOOK, {
-  update(cache, { data: { saveBook } }) {
-    try {
-      const { books } = cache.readQuery({ query: QUERY_THOUGHTS });
-
-      cache.writeQuery({
-        query: QUERY_THOUGHTS,
-        data: { books: [saveBook, ...books] },
-      });
-    } catch (e) {
-      console.error(e);
-    }
-
-    // update me object's cache
-    const { me } = cache.readQuery({ query: QUERY_ME });
-    cache.writeQuery({
-      query: QUERY_ME,
-      data: { me: { ...me, books: [...me.books, saveBook] } },
-    });
-  },
-});
-
-
   // if data isn't here yet, say so
   if (!userDataLength) {
     return <h2>LOADING...</h2>;
